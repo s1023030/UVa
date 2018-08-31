@@ -1,0 +1,88 @@
+#include<cstdio>
+#include<queue>
+#include<iostream>
+#include<iomanip>
+using namespace std;
+int main(){
+    queue<int>processR;
+    queue<int>processC;
+    int graph[1002][1002];
+    int totalRow,totalCol,atr,atc,sr,sc,dr,dc,i,j,k,rows,bombN,tempInt,temp;
+    while(scanf("%d%d",&totalRow,&totalCol)&&totalCol!=0&&totalRow!=0){
+        for(i=0;i<=totalRow+1;i++){
+            for(j=0;j<=totalCol+1;j++){
+                if(i==0||j==0||i==totalRow+1||j==totalCol+1){
+                    graph[i][j]=-1;
+                }
+                else{
+                    graph[i][j]=0;
+                }
+            }
+        }
+        scanf("%d",&rows);
+        for(i=0;i<rows;i++){
+            scanf("%d",&temp);
+            scanf("%d",&bombN);
+            for(j=1;j<=bombN;j++){
+                scanf("%d",&tempInt);
+                graph[temp+1][tempInt+1]=-1;
+            }
+        }
+        scanf("%d%d",&sr,&sc);
+        scanf("%d%d",&dr,&dc);
+        dr++;
+        dc++;
+        processC.push(sc+1);
+        processR.push(sr+1);
+        tempInt=0;
+        while(processR.size()>0){
+            atr=processR.front();
+            atc=processC.front();
+            processC.pop();
+            processR.pop();
+            if(graph[atr-1][atc]==0){
+                if(atr-1==dr&&atc==dc){
+                    printf("%d\n",graph[atr][atc]+1);
+                    break;
+                }
+                graph[atr-1][atc]=graph[atr][atc]+1;
+                processR.push(atr-1);
+                processC.push(atc);
+            }
+            if(graph[atr+1][atc]==0){
+                if(atr+1==dr&&atc==dc){
+                    printf("%d\n",graph[atr][atc]+1);
+                    break;
+                }
+                graph[atr+1][atc]=graph[atr][atc]+1;
+                processR.push(atr+1);
+                processC.push(atc);
+            }
+            if(graph[atr][atc-1]==0){
+                if(atr==dr&&atc-1==dc){
+                    printf("%d\n",graph[atr][atc]+1);
+                    break;
+                }
+                graph[atr][atc-1]=graph[atr][atc]+1;
+                processR.push(atr);
+                processC.push(atc-1);
+            }
+            if(graph[atr][atc+1]==0){
+                if(atr==dr&&atc+1==dc){
+                    printf("%d\n",graph[atr][atc]+1);
+                    break;
+                }
+                graph[atr][atc+1]=graph[atr][atc]+1;
+                processR.push(atr);
+                processC.push(atc+1);
+            }
+        }
+        while(!processC.empty()){
+            processC.pop();
+        }
+        while(!processR.empty()){
+            processR.pop();
+        }
+    }
+    return 0;
+}
