@@ -2,7 +2,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class uva100 {
+public class Main {
     public static Map<Integer, Integer> cycleLength = new HashMap<>();
     private static int calLength(int num){
         if(cycleLength.containsKey(num)){
