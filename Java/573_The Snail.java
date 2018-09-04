@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class uva573 {
+public class Main {
     public static boolean cp20(double a){
         if(a>-0.0000000001&&a<0.0000000001){
             return true;
