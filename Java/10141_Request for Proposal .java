@@ -4,7 +4,7 @@ class Proposal{
     public double price;
     public int checks;
 }
-public class uva10141 {
+public class Main {
     public static void main(String[] args){
         int numR,numP;
         int caseNum=1;
